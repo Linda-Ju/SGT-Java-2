@@ -2,8 +2,6 @@ package lv.linda.rocketshop.ecommerce.repository;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -14,6 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,9 +26,6 @@ public class Order {
     @OneToMany(mappedBy = "pk.order")
     @Valid
     private List<OrderProduct> orderProducts = new ArrayList<>();
-
-    public Order() {
-    }
 
     @Transient
     public Double getTotalOrderPrice() {
@@ -45,6 +41,8 @@ public class Order {
     public int getNumberOfProducts() {
         return this.orderProducts.size();
     }
+
+    // standard getters and setters
 
     public Long getId() {
         return id;
@@ -77,6 +75,4 @@ public class Order {
     public void setOrderProducts(List<OrderProduct> orderProducts) {
         this.orderProducts = orderProducts;
     }
-
-    // standard getters and setters
 }

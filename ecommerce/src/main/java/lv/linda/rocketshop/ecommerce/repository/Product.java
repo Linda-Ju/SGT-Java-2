@@ -2,6 +2,7 @@ package lv.linda.rocketshop.ecommerce.repository;
 
 import javax.persistence.*;
 
+@Entity
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +14,13 @@ public class Product {
     private Double price;
 
     private String pictureUrl;
+
+    public Product(Long id) {
+        this.id = id;
+    }
+
+    public Product() {
+    }
 
     public Product(Long id, String name, Double price, String pictureUrl) {
         this.id = id;

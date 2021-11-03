@@ -2,12 +2,14 @@ package lv.linda.rocketshop.ecommerce.repository;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.annotation.Transient;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.Objects;
 
+@Entity
 public class OrderProduct {
     @EmbeddedId
     @JsonIgnore
@@ -16,7 +18,8 @@ public class OrderProduct {
     @Column(nullable = false)
     private Integer quantity;
 
-    // default constructor
+    public OrderProduct() {
+    }
 
     public OrderProduct(Order order, Product product, Integer quantity) {
         pk = new OrderProductPK();
@@ -29,6 +32,7 @@ public class OrderProduct {
     public Product getProduct() {
         return this.pk.getProduct();
     }
+
 
     @Transient
     public Double getTotalPrice() {
@@ -63,8 +67,4 @@ public class OrderProduct {
     public int hashCode() {
         return Objects.hash(pk, quantity);
     }
-
-    // standard getters and setters
-
-    // hashcode() and equals() methods
 }
